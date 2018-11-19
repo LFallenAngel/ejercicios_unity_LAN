@@ -8,13 +8,28 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public int fuerza = 10;
     int fuerzaSalto = 30;
+    private Vector2 mousePosition;
+    public float moveSpeed = 10f;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        mousePosition = transform.position;
     }
 
     void Update()
+    {
+        movimiento();
+        seguirRaton();
+    }
+    void seguirRaton()
+    {
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 posicion = new Vector2(mousePosition.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, posicion, moveSpeed * Time.deltaTime);
+    }
+    void movimiento()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -33,4 +48,5 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.down * fuerza);
         }
     }
+
 }
