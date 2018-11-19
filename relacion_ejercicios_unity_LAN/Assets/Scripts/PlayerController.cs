@@ -10,24 +10,26 @@ public class PlayerController : MonoBehaviour
     int fuerzaSalto = 30;
     private Vector2 mousePosition;
     public float moveSpeed = 10f;
+    private Vector2 posicionMovimiento;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        mousePosition = transform.position;
     }
 
     void Update()
     {
         movimiento();
-        seguirRaton();
+        //seguirRaton();
+        seguirPulsarRaton();
     }
     void seguirRaton()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 posicion = new Vector2(mousePosition.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, posicion, moveSpeed * Time.deltaTime);
+        // time.deltaTime sirve para detectar los segundos por frame * por la velocidad
     }
     void movimiento()
     {
@@ -47,6 +49,17 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.down * fuerza);
         }
+    }
+    void seguirPulsarRaton()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            posicionMovimiento = mousePosition;
+        }
+
+        Vector2 posicion = new Vector2(mousePosition.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, posicion, moveSpeed * Time.deltaTime);
     }
 
 }
