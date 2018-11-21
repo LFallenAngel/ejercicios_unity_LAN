@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Transform moneda;
 
+
     public int fuerza = 10;
     public float moveSpeed = 10f;
 
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
    
     private Vector2 mousePosition;
     private Vector2 posicionMovimiento;
-
+    private int maxMonedas = 0;
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         movimiento();
         //seguirRaton();
-        seguirPulsarRaton();
+        //seguirPulsarRaton();
     }
     void seguirRaton()
     {
@@ -56,6 +57,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.down * fuerza);
         }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (maxMonedas==1 ) {
+
+                lanzaMonedas(transform);
+            }
+            
+        }
     }
     void seguirPulsarRaton()
     {
@@ -70,9 +79,10 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "magnetico")
+        if (col.gameObject.tag == "magnetico" && maxMonedas == 0)
         {
             atraerMonedas(col.transform);
+            maxMonedas = 1;
         }
 
 
@@ -82,8 +92,18 @@ public class PlayerController : MonoBehaviour
     {
 
         trMoneda.parent = transform;
+
+        trMoneda.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+       // trMoneda.GetComponent<Rigidbody2D>().mass = 0;
        
-       
+    }
+
+    void lanzaMonedas(Transform trMoneda)
+    {
+        trMoneda.transform.DetachChildren();
+        trMoneda.GetComponent<Rigidbody2D>().AddForce(new Vector2(10, 0)*fuerza);
+        
+        
     }
 }
 
