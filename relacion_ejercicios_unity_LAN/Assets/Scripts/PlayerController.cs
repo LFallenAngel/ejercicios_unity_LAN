@@ -6,16 +6,23 @@ public class PlayerController : MonoBehaviour
 {
 
     Rigidbody2D rb;
+    Transform moneda;
+
     public int fuerza = 10;
-    int fuerzaSalto = 30;
-    private Vector2 mousePosition;
     public float moveSpeed = 10f;
+
+    int fuerzaSalto = 30;
+    
+   
+    private Vector2 mousePosition;
     private Vector2 posicionMovimiento;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+       // moneda = GameObject.Find("magnetico").GetComponent<Transform>();
+        
     }
 
     void Update()
@@ -61,5 +68,22 @@ public class PlayerController : MonoBehaviour
         Vector2 posicion = new Vector2(mousePosition.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, posicion, moveSpeed * Time.deltaTime);
     }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "magnetico")
+        {
+            atraerMonedas(col.transform);
+        }
 
+
+    }
+   
+    void atraerMonedas(Transform trMoneda)
+    {
+
+        trMoneda.parent = transform;
+       
+       
+    }
 }
+
