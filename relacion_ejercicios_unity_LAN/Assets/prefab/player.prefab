@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212960385204649708}
   - component: {fileID: 50394023830908742}
   - component: {fileID: 60594364572231396}
+  - component: {fileID: 250252502334339146}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -154,3 +155,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!250 &250252502334339146
+PointEffector2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1816865113375996}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: -10
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0

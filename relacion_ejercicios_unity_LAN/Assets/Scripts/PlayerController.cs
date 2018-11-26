@@ -7,39 +7,45 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
     Transform moneda;
-
+    Rigidbody2D rbMoneda;
+    public Transform imanMonedas;
 
     public int fuerza = 10;
     public float moveSpeed = 10f;
+    public int fuerzaMoneda = 10;
+    public List<GameObject> arrayMonedas = new List<GameObject>();
+
 
     int fuerzaSalto = 30;
-    
-   
+
+
     private Vector2 mousePosition;
     private Vector2 posicionMovimiento;
-    private int maxMonedas = 0;
+    private int maxMonedas = 5;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-       // moneda = GameObject.Find("magnetico").GetComponent<Transform>();
-        
+        // moneda = GameObject.Find("magnetico").GetComponent<Transform>();
+
     }
+
 
     void Update()
     {
-        movimiento();
-        //seguirRaton();
-        //seguirPulsarRaton();
+        Movimiento();
+        //SeguirRaton();
+        //SeguirPulsarRaton();
     }
-    void seguirRaton()
+    void SeguirRaton()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 posicion = new Vector2(mousePosition.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, posicion, moveSpeed * Time.deltaTime);
         // time.deltaTime sirve para detectar los segundos por frame * por la velocidad
     }
-    void movimiento()
+    void Movimiento()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -59,14 +65,11 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            if (maxMonedas==1 ) {
+            LanzaMonedas();
 
-                lanzaMonedas(transform);
-            }
-            
         }
     }
-    void seguirPulsarRaton()
+    void SeguirPulsarRaton()
     {
         if (Input.GetMouseButton(0))
         {
@@ -79,31 +82,47 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "magnetico" && maxMonedas == 0)
+        if (col.gameObject.tag == "magnetico" && arrayMonedas.Count < maxMonedas)
         {
-            atraerMonedas(col.transform);
-            maxMonedas = 1;
+            rbMoneda = col.gameObject.GetComponent<Rigidbody2D>();
+
+            rbMoneda.simulated = false;
+
+            arrayMonedas.Add(col.gameObject);
+            //Debug.Log("Tengo " + arrayMonedas.Count);
+
+            AtraerMonedas(col.transform);
         }
 
 
     }
-   
-    void atraerMonedas(Transform trMoneda)
+
+    void AtraerMonedas(Transform trMoneda)
     {
+        trMoneda.position = imanMonedas.position;
 
         trMoneda.parent = transform;
 
-        trMoneda.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-       // trMoneda.GetComponent<Rigidbody2D>().mass = 0;
-       
+        //trMoneda.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        // trMoneda.GetComponent<Rigidbody2D>().mass = 0;
+
     }
 
-    void lanzaMonedas(Transform trMoneda)
+    void LanzaMonedas()
     {
-        trMoneda.transform.DetachChildren();
-        trMoneda.GetComponent<Rigidbody2D>().AddForce(new Vector2(10, 0)*fuerza);
-        
-        
+        GameObject ultimaMoneda;
+
+        rbMoneda.simulated = true;
+
+        ultimaMoneda = arrayMonedas[arrayMonedas.Count - 1];
+
+        ultimaMoneda.transform.parent = null;
+        rbMoneda.velocity = Vector2.right * fuerzaMoneda;
+
+        arrayMonedas.Remove(ultimaMoneda);
+
+
+
     }
 }
 

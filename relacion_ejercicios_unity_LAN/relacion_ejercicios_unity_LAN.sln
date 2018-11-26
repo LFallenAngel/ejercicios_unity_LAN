@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "relacion_ejercicios_unity_LAN", "relacion_ejercicios_unity_LAN.csproj", "{3033FBCD-160F-C725-0F41-F1B3E97F1CF0}"
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "relacion_ejercicios_unity_LAN", "Assembly-CSharp.csproj", "{027B92CE-39B7-57B5-0FBD-73FC6981C93F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3033FBCD-160F-C725-0F41-F1B3E97F1CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3033FBCD-160F-C725-0F41-F1B3E97F1CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3033FBCD-160F-C725-0F41-F1B3E97F1CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3033FBCD-160F-C725-0F41-F1B3E97F1CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027B92CE-39B7-57B5-0FBD-73FC6981C93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027B92CE-39B7-57B5-0FBD-73FC6981C93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027B92CE-39B7-57B5-0FBD-73FC6981C93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027B92CE-39B7-57B5-0FBD-73FC6981C93F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
