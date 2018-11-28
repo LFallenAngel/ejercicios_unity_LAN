@@ -32,6 +32,16 @@ public class GameController : MonoBehaviour {
         {
             Time.timeScale = 1f;
         }
+       
+
+        
+
+    }
+
+    public void PulsoPlay()
+    {
+        Time.timeScale = 1f;
+        animInterface.SetBool("activar", !pausa);
 
     }
 }
