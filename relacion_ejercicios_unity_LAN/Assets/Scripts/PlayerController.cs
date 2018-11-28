@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Transform moneda;
     Rigidbody2D rbMoneda;
+    public Text textoMoneda;
     public Transform imanMonedas;
 
     public int fuerza = 10;
     public float moveSpeed = 10f;
     public int fuerzaMoneda = 10;
+    public int monedas = 0;
     public List<GameObject> arrayMonedas = new List<GameObject>();
 
 
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        textoMoneda.text = monedas.ToString();
         // moneda = GameObject.Find("magnetico").GetComponent<Transform>();
 
     }
@@ -66,6 +70,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             LanzaMonedas();
+            monedas--;
+            textoMoneda.text = monedas.ToString();
 
         }
     }
@@ -92,6 +98,9 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Tengo " + arrayMonedas.Count);
 
             AtraerMonedas(col.transform);
+
+            monedas++;
+            textoMoneda.text = monedas.ToString();
         }
 
 
@@ -120,6 +129,8 @@ public class PlayerController : MonoBehaviour
         rbMoneda.velocity = Vector2.right * fuerzaMoneda;
 
         arrayMonedas.Remove(ultimaMoneda);
+
+        
 
 
 
