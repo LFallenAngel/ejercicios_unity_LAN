@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 
     Rigidbody2D rb;
-    Transform moneda;
+    //Transform moneda;
     Rigidbody2D rbMoneda;
     public Text textoMoneda;
     public Transform imanMonedas;
@@ -41,6 +41,16 @@ public class PlayerController : MonoBehaviour
         Movimiento();
         //SeguirRaton();
         //SeguirPulsarRaton();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LanzaMonedas();
+
+            //CONTADOR IU
+            monedas--;
+            textoMoneda.text = monedas.ToString();
+
+        }
     }
     void SeguirRaton()
     {
@@ -67,13 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.down * fuerza);
         }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            LanzaMonedas();
-            monedas--;
-            textoMoneda.text = monedas.ToString();
-
-        }
+        
     }
     void SeguirPulsarRaton()
     {
@@ -95,10 +99,10 @@ public class PlayerController : MonoBehaviour
             rbMoneda.simulated = false;
 
             arrayMonedas.Add(col.gameObject);
-            //Debug.Log("Tengo " + arrayMonedas.Count);
-
             AtraerMonedas(col.transform);
 
+
+            //CONTADOR  IU
             monedas++;
             textoMoneda.text = monedas.ToString();
         }
@@ -112,8 +116,6 @@ public class PlayerController : MonoBehaviour
 
         trMoneda.parent = transform;
 
-        //trMoneda.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        // trMoneda.GetComponent<Rigidbody2D>().mass = 0;
 
     }
 
@@ -121,17 +123,15 @@ public class PlayerController : MonoBehaviour
     {
         GameObject ultimaMoneda;
 
-        rbMoneda.simulated = true;
 
         ultimaMoneda = arrayMonedas[arrayMonedas.Count - 1];
-
         ultimaMoneda.transform.parent = null;
+        rbMoneda = ultimaMoneda.GetComponent<Rigidbody2D>();
+        rbMoneda.simulated = true;
+        
         rbMoneda.velocity = Vector2.right * fuerzaMoneda;
 
         arrayMonedas.Remove(ultimaMoneda);
-
-        
-
 
 
     }
